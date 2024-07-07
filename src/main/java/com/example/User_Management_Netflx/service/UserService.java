@@ -24,13 +24,22 @@ public class UserService {
 
 
     public ApiResponse saveUser(UserDTO userDTO){
-        try{
-            userRepo.save(modelMapper.map(userDTO, User.class));
-            return new ApiResponse(true,"User registration successful");
-        }catch (Exception e){
-            return new ApiResponse(false,"User registration failed"+e.getMessage());
-        }
+            if (userRepo.existsById(userDTO.getId())){
+                return new ApiResponse(false,"User is already exist");
+            }else {
+                userRepo.save(modelMapper.map(userDTO, User.class));
+                return new ApiResponse(true,"User registration success");
+            }
+    }
 
+    public ApiResponse updateUser(UserDTO userDTO){
+
+            if(userRepo.existsById(userDTO.getId())){
+                userRepo.save(modelMapper.map(userDTO,User.class));
+                return new ApiResponse(true,"User update success");
+            }else {
+                return new ApiResponse(false,"User not found");
+            }
 
     }
 

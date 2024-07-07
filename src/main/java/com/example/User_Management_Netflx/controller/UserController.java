@@ -33,6 +33,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
-//    thusitha dnnf
+
+    @PutMapping("/updateProfile")
+    public ResponseEntity<ApiResponse> updateUser(@RequestBody UserDTO userDTO){
+        ApiResponse response= userService.updateUser(userDTO);
+        if (response.isSuccess()){
+            return ResponseEntity.ok(response);
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
 
 }
