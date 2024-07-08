@@ -24,6 +24,8 @@ public class UserController {
     public List<UserDTO> getUser(){
         return userService.getAllUsers();
     }
+
+
     @PostMapping("/saveUser")
     public ResponseEntity<ApiResponse> saveUser(@RequestBody UserDTO userDTO){
         ApiResponse response =   userService.saveUser(userDTO);
