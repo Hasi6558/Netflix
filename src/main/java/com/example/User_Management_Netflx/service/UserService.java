@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,6 +31,15 @@ public class UserService {
                 userRepo.save(modelMapper.map(userDTO, User.class));
                 return new ApiResponse(true,"User registration success");
             }
+    }
+
+    public boolean authenticate(String username,String password){
+        Optional<User> userOpt =userRepo.findByUsername(username);
+        if (userOpt.isPresent()){
+            User user =userOpt.get();
+            return user.getPassword().equals(password);
+        }
+        return false;
     }
 
     public ApiResponse updateUser(UserDTO userDTO){
