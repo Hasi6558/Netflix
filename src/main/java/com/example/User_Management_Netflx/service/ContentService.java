@@ -45,4 +45,14 @@ public class ContentService {
         return modelMapper.map(content, ContentDTO.class);
     }
 
+    public ApiResponse updateContent(ContentDTO contentDTO){
+        contentRepo.save(modelMapper.map(contentDTO,Content.class));
+        return new ApiResponse(true,"Successfully updated the Content");
+    }
+
+    public ApiResponse deleteContent(Integer contentId){
+        contentRepo.deleteById(contentId);
+        return new ApiResponse(true,"Successfully deleted the content");
+    }
+
 }
