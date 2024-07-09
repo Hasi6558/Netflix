@@ -39,4 +39,23 @@ public class ContentController {
     public ContentDTO getContentById(@PathVariable String contentId){
         return contentService.getContentById(contentId);
     }
+    @PutMapping("/updateContent")
+    public ResponseEntity<ApiResponse> updateContent(@RequestBody ContentDTO contentDTO){
+        ApiResponse response = contentService.updateContent(contentDTO);
+        if (response.isSuccess()){
+            return ResponseEntity.ok(response);
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @DeleteMapping("/deleteContent/{contentId}")
+    public ResponseEntity<ApiResponse> deleteContent(@PathVariable Integer contentId){
+        ApiResponse response = contentService.deleteContent(contentId);
+        if (response.isSuccess()){
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 }
