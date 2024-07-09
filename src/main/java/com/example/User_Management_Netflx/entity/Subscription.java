@@ -1,6 +1,5 @@
 package com.example.User_Management_Netflx.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,19 +8,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String first_name;
-    private String last_name;
-    private String username;
-    private String email;
-    private String password;
-    private String role;
+
+    private int userId;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

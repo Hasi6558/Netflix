@@ -1,6 +1,5 @@
 package com.example.User_Management_Netflx.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,17 +10,17 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+@NoArgsConstructor
+public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String first_name;
-    private String last_name;
-    private String username;
-    private String email;
-    private String password;
-    private String role;
+    private String title;
+    private int releaseYear;
+    private String genre;
+    private String type;
+    private String posterUrl;
+    private String embedUrl;
+
 }
