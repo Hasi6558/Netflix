@@ -2,16 +2,20 @@ package com.example.User_Management_Netflx.service;
 
 import com.example.User_Management_Netflx.dto.ApiResponse;
 import com.example.User_Management_Netflx.dto.UserDTO;
+import com.example.User_Management_Netflx.entity.Role;
 import com.example.User_Management_Netflx.entity.User;
+import com.example.User_Management_Netflx.repo.RoleRepo;
 import com.example.User_Management_Netflx.repo.UserRepo;
 import jakarta.transaction.Transactional;
+import org.hibernate.type.descriptor.sql.internal.NativeEnumDdlTypeImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,30 +25,22 @@ public class UserService {
     private UserRepo userRepo;
 
     @Autowired
+    private RoleRepo roleRepo;
+
+    @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public ApiResponse saveUser(UserDTO userDTO){
-            if (userRepo.existsById(userDTO.getId())){
-                return new ApiResponse(false,"User is already exist");
-            }else {
-                userRepo.save(modelMapper.map(userDTO, User.class));
-                return new ApiResponse(true,"User registration success");
-            }
+    public User registerNewUser(UserDTO userDTO){
+        return userRepo.save(modelMapper.map(userDTO, User.class));
     }
 
-    public boolean authenticate(String username,String password){
-        Optional<User> userOpt =userRepo.findByUsername(username);
-        if (userOpt.isPresent()){
-            User user =userOpt.get();
-            return user.getPassword().equals(password);
-        }
-        return false;
-    }
 
     public ApiResponse updateUser(UserDTO userDTO){
 
-            if(userRepo.existsById(userDTO.getId())){
+            if(userRepo.existsById(userDTO.getUsername())){
                 userRepo.save(modelMapper.map(userDTO,User.class));
                 return new ApiResponse(true,"User update success");
             }else {
@@ -57,10 +53,5 @@ public class UserService {
         List<User>userList = userRepo.findAll();
         return modelMapper.map(userList,new TypeToken<List<UserDTO>>(){}.getType());
     }
-
-    public User getUserById(int id){
-        return  userRepo.findById(id).orElse(null);
-    }
-
 
 }
