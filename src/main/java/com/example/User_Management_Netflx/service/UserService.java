@@ -33,13 +33,19 @@ public class UserService {
             }
     }
 
-    public boolean authenticate(String username,String password){
-        Optional<User> userOpt =userRepo.findByUsername(username);
-        if (userOpt.isPresent()){
-            User user =userOpt.get();
-            return user.getPassword().equals(password);
+    public ApiResponse authenticate(String username, String password) {
+        Optional<User> userOpt = userRepo.findByUsername(username);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (user.getPassword().equals(password)) {
+                UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+                return new ApiResponse(true, "Authentication successful", userDTO);
+            } else {
+                return new ApiResponse(false, "Invalid password");
+            }
+        } else {
+            return new ApiResponse(false, "User not found");
         }
-        return false;
     }
 
     public ApiResponse updateUser(UserDTO userDTO){
