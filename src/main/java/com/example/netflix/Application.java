@@ -1,18 +1,16 @@
-package com.example.User_Management_Netflx;
+package com.example.netflix;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.ui.ModelMap;
 
 @SpringBootApplication
-public class UserManagementNetflxApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserManagementNetflxApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
-
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();

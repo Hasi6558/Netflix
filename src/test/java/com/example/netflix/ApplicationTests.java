@@ -1,10 +1,10 @@
-package com.example.User_Management_Netflx;
+package com.example.netflix;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserManagementNetflxApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
