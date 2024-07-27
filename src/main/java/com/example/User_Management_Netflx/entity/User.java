@@ -1,10 +1,7 @@
 package com.example.User_Management_Netflx.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,7 @@ public class User {
     private int id;
     private String first_name;
     private String last_name;
+    @Column(unique = true, nullable = false)
     private String username;
     private String email;
     private String password;

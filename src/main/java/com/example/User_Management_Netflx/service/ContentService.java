@@ -2,9 +2,7 @@ package com.example.User_Management_Netflx.service;
 
 import com.example.User_Management_Netflx.dto.ApiResponse;
 import com.example.User_Management_Netflx.dto.ContentDTO;
-import com.example.User_Management_Netflx.dto.UserDTO;
 import com.example.User_Management_Netflx.entity.Content;
-import com.example.User_Management_Netflx.entity.User;
 import com.example.User_Management_Netflx.repo.ContentRepo;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;

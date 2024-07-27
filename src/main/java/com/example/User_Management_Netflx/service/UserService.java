@@ -67,6 +67,10 @@ public class UserService {
     public User getUserById(int id){
         return  userRepo.findById(id).orElse(null);
     }
+    public ApiResponse deleteUser(Integer userId){
+        userRepo.deleteById(userId);
+        return new ApiResponse(true,"Successfully deleted the user");
+    }
 
 
 }

@@ -50,6 +50,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-
+    @DeleteMapping("/deleteUser/{userId}")
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId){
+        ApiResponse response = userService.deleteUser(userId);
+        if (response.isSuccess()){
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 
 }
