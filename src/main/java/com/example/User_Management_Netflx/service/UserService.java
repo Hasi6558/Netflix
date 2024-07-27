@@ -25,7 +25,7 @@ public class UserService {
 
 
     public ApiResponse saveUser(UserDTO userDTO){
-            if (userRepo.existsById(userDTO.getId())){
+            if (userRepo.existsByUsername(userDTO.getUsername())){
                 return new ApiResponse(false,"User is already exist");
             }else {
                 userRepo.save(modelMapper.map(userDTO, User.class));
@@ -50,7 +50,7 @@ public class UserService {
 
     public ApiResponse updateUser(UserDTO userDTO){
 
-            if(userRepo.existsById(userDTO.getId())){
+            if(userRepo.existsByUsername(userDTO.getUsername())){
                 userRepo.save(modelMapper.map(userDTO,User.class));
                 return new ApiResponse(true,"User update success");
             }else {
