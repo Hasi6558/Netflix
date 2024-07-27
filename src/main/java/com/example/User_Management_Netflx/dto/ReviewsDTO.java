@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ReviewsDTO {
     private int id;
     private int userId;
+    private int movieId;
     private int rating;
     private String content;
 }
